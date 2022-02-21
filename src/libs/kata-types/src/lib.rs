@@ -11,7 +11,7 @@ extern crate slog;
 #[macro_use]
 extern crate serde;
 
-/// Constants and data types annotations.
+/// Constants and data types related to annotations.
 pub mod annotations;
 
 /// Kata configuration information from configuration file.
@@ -20,11 +20,24 @@ pub mod config;
 /// Constants and data types related to container.
 pub mod container;
 
+/// Constants and data types related to CPU.
+pub mod cpu;
+
 /// Constants and data types related to Kubernetes/kubelet.
 pub mod k8s;
 
 /// Constants and data types related to mount point.
 pub mod mount;
+
+pub(crate) mod utils;
+
+/// Common error codes.
+#[derive(thiserror::Error, Debug)]
+pub enum Error {
+    /// Invalid configuration list.
+    #[error("invalid list {0}")]
+    InvalidList(String),
+}
 
 /// Convenience macro to obtain the scoped logger
 #[macro_export]
